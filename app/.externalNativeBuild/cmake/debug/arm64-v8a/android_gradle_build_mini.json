@@ -1,0 +1,31 @@
+{
+  "buildFiles": [
+    "O:\\Projects\\app\\src\\main\\cpp\\CMakeLists.txt"
+  ],
+  "cleanCommands": [
+    "E:\\libs\\android-sdk\\cmake\\3.6.4111459\\bin\\cmake.exe --build O:\\Projects\\app\\.externalNativeBuild\\cmake\\debug\\arm64-v8a --target clean"
+  ],
+  "libraries": {
+    "apps_mem_heap-Debug-arm64-v8a": {
+      "artifactName": "apps_mem_heap",
+      "abi": "arm64-v8a",
+      "output": "O:\\Projects\\app\\src\\main\\cpp\\..\\jniLibs\\arm64-v8a\\libapps_mem_heap.so"
+    },
+    "native-lib-Debug-arm64-v8a": {
+      "artifactName": "native-lib",
+      "buildCommand": "E:\\libs\\android-sdk\\cmake\\3.6.4111459\\bin\\cmake.exe --build O:\\Projects\\app\\.externalNativeBuild\\cmake\\debug\\arm64-v8a --target native-lib",
+      "abi": "arm64-v8a",
+      "output": "O:\\Projects\\app\\build\\intermediates\\cmake\\debug\\obj\\arm64-v8a\\libnative-lib.so"
+    },
+    "fastcvadsp-Debug-arm64-v8a": {
+      "artifactName": "fastcvadsp",
+      "abi": "arm64-v8a",
+      "output": "O:\\Projects\\app\\src\\main\\cpp\\..\\jniLibs\\arm64-v8a\\libfastcvadsp.so"
+    },
+    "hetCompute-1.0.0-Debug-arm64-v8a": {
+      "artifactName": "hetCompute-1.0.0",
+      "abi": "arm64-v8a",
+      "output": "O:\\Projects\\app\\src\\main\\cpp\\..\\jniLibs\\arm64-v8a\\libhetCompute-1.0.0.so"
+    }
+  }
+}

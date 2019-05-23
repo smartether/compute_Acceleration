@@ -1,0 +1,36 @@
+{
+  "buildFiles": [
+    "O:\\hetcomputeDemo\\app\\src\\main\\cpp\\CMakeLists.txt"
+  ],
+  "cleanCommands": [
+    "E:\\libs\\android-sdk\\cmake\\3.6.4111459\\bin\\cmake.exe --build O:\\hetcomputeDemo\\app\\.externalNativeBuild\\cmake\\debug\\armeabi-v7a --target clean"
+  ],
+  "libraries": {
+    "hetCompute-1.0.0-Debug-armeabi-v7a": {
+      "artifactName": "hetCompute-1.0.0",
+      "abi": "armeabi-v7a",
+      "output": "O:\\hetcomputeDemo\\app\\src\\main\\cpp\\..\\jniLibs\\armeabi-v7a\\libhetCompute-1.0.0.so"
+    },
+    "fastcvadsp_stub-Debug-armeabi-v7a": {
+      "artifactName": "fastcvadsp_stub",
+      "abi": "armeabi-v7a",
+      "output": "O:\\hetcomputeDemo\\app\\src\\main\\cpp\\..\\jniLibs\\armeabi-v7a\\libfastcvadsp_stub.so"
+    },
+    "fastcvopt-Debug-armeabi-v7a": {
+      "artifactName": "fastcvopt",
+      "abi": "armeabi-v7a",
+      "output": "O:\\hetcomputeDemo\\app\\src\\main\\cpp\\..\\jniLibs\\armeabi-v7a\\libfastcvopt.so"
+    },
+    "native-lib-Debug-armeabi-v7a": {
+      "artifactName": "native-lib",
+      "buildCommand": "E:\\libs\\android-sdk\\cmake\\3.6.4111459\\bin\\cmake.exe --build O:\\hetcomputeDemo\\app\\.externalNativeBuild\\cmake\\debug\\armeabi-v7a --target native-lib",
+      "abi": "armeabi-v7a",
+      "output": "O:\\hetcomputeDemo\\app\\build\\intermediates\\cmake\\debug\\obj\\armeabi-v7a\\libnative-lib.so"
+    },
+    "qml-Debug-armeabi-v7a": {
+      "artifactName": "qml",
+      "abi": "armeabi-v7a",
+      "output": "O:\\hetcomputeDemo\\app\\src\\main\\cpp\\..\\jniLibs\\armeabi-v7a\\libQML-1.1.0.so"
+    }
+  }
+}

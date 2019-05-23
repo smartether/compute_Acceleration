@@ -1,0 +1,7 @@
+[
+{
+  "directory": "O:/Projects/app/.externalNativeBuild/cmake/release/arm64-v8a",
+  "command": "E:\\libs\\android-ndk-r16b\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=aarch64-none-linux-android --gcc-toolchain=E:/libs/android-ndk-r16b/toolchains/aarch64-linux-android-4.9/prebuilt/windows-x86_64 --sysroot=E:/libs/android-ndk-r16b/sysroot  -Dnative_lib_EXPORTS -isystem E:/libs/android-ndk-r16b/sources/cxx-stl/gnu-libstdc++/4.9/include -isystem E:/libs/android-ndk-r16b/sources/cxx-stl/gnu-libstdc++/4.9/libs/arm64-v8a/include -isystem E:/libs/android-ndk-r16b/sources/cxx-stl/gnu-libstdc++/4.9/include/backward  -isystem E:/libs/android-ndk-r16b/sysroot/usr/include/aarch64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -std=c++11 -O2 -DNDEBUG  -fPIC   -o CMakeFiles\\native-lib.dir\\native-lib.cpp.o -c O:\\Projects\\app\\src\\main\\cpp\\native-lib.cpp",
+  "file": "O:\\Projects\\app\\src\\main\\cpp\\native-lib.cpp"
+}
+]

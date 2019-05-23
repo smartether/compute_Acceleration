@@ -1,0 +1,20 @@
+Executable : E:\libs\android-sdk\cmake\3.10.2.4988404\bin\cmake.exe
+arguments : 
+-HO:\Projects\app\src\main\cpp
+-BO:\Projects\app\.externalNativeBuild\cmake\release\arm64-v8a
+-DANDROID_ABI=arm64-v8a
+-DANDROID_PLATFORM=android-21
+-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=O:\Projects\app\build\intermediates\cmake\release\obj\arm64-v8a
+-DCMAKE_BUILD_TYPE=Release
+-DANDROID_NDK=E:\libs\android-ndk-r16b
+-DCMAKE_CXX_FLAGS=-std=c++11
+-DCMAKE_SYSTEM_NAME=Android
+-DCMAKE_ANDROID_ARCH_ABI=arm64-v8a
+-DCMAKE_SYSTEM_VERSION=21
+-DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+-DCMAKE_ANDROID_NDK=E:\libs\android-ndk-r16b
+-DCMAKE_TOOLCHAIN_FILE=E:\libs\android-ndk-r16b\build\cmake\android.toolchain.cmake
+-G Ninja
+-DCMAKE_MAKE_PROGRAM=E:\libs\android-sdk\cmake\3.10.2.4988404\bin\ninja.exe
+jvmArgs : 
+

@@ -1,0 +1,17 @@
+{
+  "buildFiles": [
+    "E:\\libs\\android-ndk-r16b\\build\\cmake\\android.toolchain.cmake",
+    "O:\\Projects\\app\\src\\main\\cpp\\CMakeLists.txt"
+  ],
+  "cleanCommands": [
+    "E:\\libs\\android-sdk\\cmake\\3.10.2.4988404\\bin\\cmake.exe --build \"O:\\Projects\\app\\.externalNativeBuild\\cmake\\release\\x86_64\" --target clean"
+  ],
+  "libraries": {
+    "native-lib-Release-x86_64": {
+      "artifactName": "native-lib",
+      "buildCommand": "E:\\libs\\android-sdk\\cmake\\3.10.2.4988404\\bin\\cmake.exe --build \"O:\\Projects\\app\\.externalNativeBuild\\cmake\\release\\x86_64\" --target native-lib",
+      "abi": "x86_64",
+      "output": "O:\\Projects\\app\\build\\intermediates\\cmake\\release\\obj\\x86_64\\libnative-lib.so"
+    }
+  }
+}

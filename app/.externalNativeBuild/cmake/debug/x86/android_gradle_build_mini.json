@@ -1,0 +1,18 @@
+{
+  "buildFiles": [
+    "E:\\libs\\android-sdk\\ndk-bundle\\build\\cmake\\platforms.cmake",
+    "O:\\Projects\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "E:\\libs\\android-sdk\\ndk-bundle\\build\\cmake\\android.toolchain.cmake"
+  ],
+  "cleanCommands": [
+    "E:\\libs\\android-sdk\\cmake\\3.10.2.4988404\\bin\\cmake.exe --build \"O:\\Projects\\app\\.externalNativeBuild\\cmake\\debug\\x86\" --target clean"
+  ],
+  "libraries": {
+    "native-lib-Debug-x86": {
+      "artifactName": "native-lib",
+      "buildCommand": "E:\\libs\\android-sdk\\cmake\\3.10.2.4988404\\bin\\cmake.exe --build \"O:\\Projects\\app\\.externalNativeBuild\\cmake\\debug\\x86\" --target native-lib",
+      "abi": "x86",
+      "output": "O:\\Projects\\app\\build\\intermediates\\cmake\\debug\\obj\\x86\\libnative-lib.so"
+    }
+  }
+}

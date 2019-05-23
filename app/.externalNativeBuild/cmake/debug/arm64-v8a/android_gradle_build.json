@@ -1,0 +1,62 @@
+
+{
+	"buildFiles" : [ "O:/Projects/app/src/main/cpp/CMakeLists.txt" ],
+	"cleanCommands" : 
+	[
+		"E:\\libs\\android-sdk\\cmake\\3.6.4111459\\bin\\cmake.exe --build O:\\Projects\\app\\.externalNativeBuild\\cmake\\debug\\arm64-v8a --target clean"
+	],
+	"cppFileExtensions" : [ "cpp" ],
+	"libraries" : 
+	{
+		"apps_mem_heap-Debug-arm64-v8a" : 
+		{
+			"abi" : "arm64-v8a",
+			"artifactName" : "apps_mem_heap",
+			"buildType" : "debug",
+			"output" : "O:/Projects/app/src/main/cpp/../jniLibs/arm64-v8a/libapps_mem_heap.so",
+			"toolchain" : "1056806119"
+		},
+		"fastcvadsp-Debug-arm64-v8a" : 
+		{
+			"abi" : "arm64-v8a",
+			"artifactName" : "fastcvadsp",
+			"buildType" : "debug",
+			"output" : "O:/Projects/app/src/main/cpp/../jniLibs/arm64-v8a/libfastcvadsp.so",
+			"toolchain" : "1056806119"
+		},
+		"hetCompute-1.0.0-Debug-arm64-v8a" : 
+		{
+			"abi" : "arm64-v8a",
+			"artifactName" : "hetCompute-1.0.0",
+			"buildType" : "debug",
+			"output" : "O:/Projects/app/src/main/cpp/../jniLibs/arm64-v8a/libhetCompute-1.0.0.so",
+			"toolchain" : "1056806119"
+		},
+		"native-lib-Debug-arm64-v8a" : 
+		{
+			"abi" : "arm64-v8a",
+			"artifactName" : "native-lib",
+			"buildCommand" : "E:\\libs\\android-sdk\\cmake\\3.6.4111459\\bin\\cmake.exe --build O:\\Projects\\app\\.externalNativeBuild\\cmake\\debug\\arm64-v8a --target native-lib",
+			"buildType" : "debug",
+			"files" : 
+			[
+				
+				{
+					"flags" : "  --target=aarch64-none-linux-android21 --gcc-toolchain=E:/libs/android-sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=E:/libs/android-sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64/sysroot  -Dnative_lib_EXPORTS -IO:\\Projects\\app\\src\\main\\cpp\\include  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -fno-addrsig -Wa,--noexecstack -Wformat -Werror=format-security -stdlib=libc++ -std=c++11 -std=c++11 -pthread -fexceptions  -frtti -Ofast -Osize  -DHETCOMPUTE_HAVE_QTI_DSP=1 -O0 -fno-limit-debug-info  -fPIC    -c ",
+					"src" : "O:/Projects/app/src/main/cpp/native-lib.cpp",
+					"workingDirectory" : "O:/Projects/app/.externalNativeBuild/cmake/debug/arm64-v8a"
+				}
+			],
+			"output" : "O:/Projects/app/build/intermediates/cmake/debug/obj/arm64-v8a/libnative-lib.so",
+			"toolchain" : "1056806119"
+		}
+	},
+	"toolchains" : 
+	{
+		"1056806119" : 
+		{
+			"cCompilerExecutable" : "E:/libs/android-sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64/bin/clang.exe",
+			"cppCompilerExecutable" : "E:/libs/android-sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64/bin/clang++.exe"
+		}
+	}
+}
