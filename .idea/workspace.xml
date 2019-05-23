@@ -83,7 +83,7 @@
                 <item name="hetcomputeDemo" type="f1a62948:ProjectNode" />
                 <item name=":app" type="2d1252cf:ModuleNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build" type="c8890929:TasksNode$1" />
+                <item name="other" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -106,12 +106,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/qianzhengwei/libhc/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="115">
-              <caret line="32" column="38" lean-forward="true" selection-start-line="32" selection-start-column="38" selection-end-line="32" selection-end-column="38" />
+            <state relative-caret-position="448">
+              <caret line="95" column="45" selection-start-line="95" selection-start-column="45" selection-end-line="95" selection-end-column="45" />
               <folding>
                 <element signature="e#671#679#0" expanded="true" />
-                <element signature="e#2550#2980#0" expanded="true" />
-                <element signature="e#2979#2980#0" expanded="true" />
+                <element signature="e#618#626#0" expanded="true" />
+                <element signature="e#3588#4224#0" expanded="true" />
+                <element signature="e#4223#4224#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -123,10 +124,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/cpp/include/fastcv.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="249">
+              <caret line="168" column="33" selection-start-line="168" selection-start-column="33" selection-end-line="168" selection-end-column="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="460">
-              <caret line="41" column="8" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="8" />
+            <state relative-caret-position="418">
+              <caret line="41" column="54" selection-start-line="41" selection-start-column="54" selection-end-line="41" selection-end-column="54" />
             </state>
           </provider>
         </entry>
@@ -134,22 +144,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/cpp/native-lib.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1487">
-              <caret line="119" column="28" selection-start-line="119" selection-start-column="21" selection-end-line="119" selection-end-column="28" />
+            <state relative-caret-position="432">
+              <caret line="182" column="30" selection-start-line="182" selection-start-column="30" selection-end-line="182" selection-end-column="30" />
               <folding>
                 <element signature="e#308#371#0" expanded="true" />
-                <element signature="e#4089#4515#0" />
-                <element signature="e#5091#5689#0" expanded="true" />
+                <element signature="e#5661#6259#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/cpp/include/fastcv.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="508231">
-              <caret line="26827" column="62" selection-start-line="26827" selection-start-column="55" selection-end-line="26827" selection-end-column="62" />
             </state>
           </provider>
         </entry>
@@ -158,36 +158,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Element</find>
-      <find>add</find>
-      <find>fcvadd</find>
-      <find>fcvadds</find>
-      <find>fcvaddf32</find>
-      <find>width</find>
-      <find>hetcompute_get_time_now</find>
-      <find>fcvElementMultiplyf32</find>
-      <find>dsp</find>
-      <find>FASTCV_OP_LOW_POWER</find>
-      <find>f32</find>
-      <find>fcvdotproductf</find>
-      <find>matrixmultiplyf32</find>
-      <find>dst</find>
       <find>element</find>
-      <find>fcvMatrixMultiplyf32</find>
       <find>cpu</find>
       <find>sin</find>
       <find>sine</find>
-      <find>dst1</find>
       <find>fcvStatus</find>
       <find>_CPU_TEST_</find>
       <find>fastcvopt</find>
       <find>fastcvdsp</find>
       <find>file</find>
-      <find>localFile</find>
       <find>filePathSystem</find>
-      <find>crash</find>
       <find>libfastcvopt</find>
+      <find>TestQualcommComputeDsp</find>
       <find>support</find>
+      <find>fcvOperationMode</find>
+      <find>stride</find>
+      <find>float32_t</find>
+      <find>fcvMatrixMultiplyf32</find>
+      <find>dst1</find>
+      <find>dotproductf32</find>
+      <find>data</find>
+      <find>left</find>
+      <find>dst</find>
+      <find>tData</find>
+      <find>width</find>
+      <find>libToCopy</find>
+      <find>src2Stride</find>
+      <find>low_pow</find>
+      <find>localFile</find>
+      <find>supportFastCV</find>
+      <find>crash</find>
     </findStrings>
     <replaceStrings>
       <replace>/</replace>
@@ -202,12 +202,12 @@
         <option value="E:/backup_f/RenderingCommandBuffers/Export/RenderingCommandBuffers/src/main/cpp/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/app/src/main/cpp/include/hetcompute_dsp.h" />
         <option value="$PROJECT_DIR$/app/src/main/cpp/include/hetcompute/dspkernel.hh" />
-        <option value="$PROJECT_DIR$/app/src/main/cpp/include/fastcv.h" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/cpp/include/CL/cl_ext_qcom.h" />
         <option value="$PROJECT_DIR$/app/src/main/cpp/include/hetcompute/internal/device/cldevice.hh" />
-        <option value="$PROJECT_DIR$/app/src/main/cpp/native-lib.cpp" />
         <option value="$PROJECT_DIR$/app/src/main/cpp/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/app/src/main/cpp/include/fastcv.h" />
+        <option value="$PROJECT_DIR$/app/src/main/cpp/native-lib.cpp" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/java/cn/qianzhengwei/libhc/MainActivity.java" />
       </list>
@@ -248,6 +248,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="E:/libs/android-sdk" />
+    <property name="device.picker.selection" value="c17290ba" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../fastcv_lib" />
     <property name="project.structure.last.edited" value="SDK Location" />
     <property name="project.structure.proportion" value="0.17" />
@@ -274,7 +275,7 @@
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App">
+    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
       <module name="app" />
       <option name="DEPLOY" value="true" />
       <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
@@ -396,6 +397,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
       <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.29889977" />
@@ -406,19 +408,19 @@
       <window_info id="Designer" order="6" />
       <window_info id="Resources Explorer" order="7" />
       <window_info id="Capture Tool" order="8" />
-      <window_info active="true" anchor="bottom" id="Run" order="0" visible="true" weight="0.3295964" />
-      <window_info anchor="bottom" x="268" y="385" width="1043" height="459" id="Logcat" order="1" type="WINDOWED" visible="true" weight="0.33370662" />
-      <window_info anchor="bottom" id="TODO" order="2" weight="0.32922733" />
+      <window_info anchor="bottom" id="Run" order="0" sideWeight="0.49755502" visible="true" weight="0.3295964" />
+      <window_info anchor="bottom" x="-81" y="191" width="1401" height="459" id="Logcat" order="1" type="WINDOWED" visible="true" weight="0.33370662" />
+      <window_info anchor="bottom" id="TODO" order="2" sideWeight="0.49938875" weight="0.32847533" />
       <window_info anchor="bottom" id="Debug" order="3" />
       <window_info anchor="bottom" id="Terminal" order="4" weight="0.32922733" />
-      <window_info anchor="bottom" id="Event Log" order="5" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.502445" side_tool="true" visible="true" weight="0.3295964" />
       <window_info anchor="bottom" id="Version Control" order="6" />
-      <window_info anchor="bottom" id="Build" order="7" weight="0.32922733" />
+      <window_info anchor="bottom" id="Build" order="7" sideWeight="0.4987775" weight="0.32847533" />
       <window_info anchor="bottom" id="Find" order="8" />
-      <window_info anchor="bottom" id="Android Profiler" order="9" show_stripe_button="false" />
-      <window_info anchor="right" id="Device File Explorer" order="0" sideWeight="0.50501674" side_tool="true" visible="true" weight="0.18398532" />
+      <window_info anchor="bottom" id="Android Profiler" order="9" />
+      <window_info active="true" anchor="right" id="Device File Explorer" order="0" sideWeight="0.50501674" side_tool="true" visible="true" weight="0.22982885" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
-      <window_info anchor="right" id="Gradle" order="2" sideWeight="0.4949833" visible="true" weight="0.18398532" />
+      <window_info anchor="right" id="Gradle" order="2" sideWeight="0.4949833" visible="true" weight="0.22982885" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info anchor="right" id="Palette&#9;" order="4" />
     </layout>
@@ -738,13 +740,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/cpp/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1354">
-          <caret line="81" column="18" selection-start-line="81" selection-start-column="18" selection-end-line="81" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="399">
@@ -782,43 +777,50 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/cpp/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1354">
+          <caret line="81" column="18" selection-start-line="81" selection-start-column="18" selection-end-line="81" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="41" column="8" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="8" />
+        <state relative-caret-position="418">
+          <caret line="41" column="54" selection-start-line="41" selection-start-column="54" selection-end-line="41" selection-end-column="54" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/cpp/native-lib.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1487">
-          <caret line="119" column="28" selection-start-line="119" selection-start-column="21" selection-end-line="119" selection-end-column="28" />
+        <state relative-caret-position="432">
+          <caret line="182" column="30" selection-start-line="182" selection-start-column="30" selection-end-line="182" selection-end-column="30" />
           <folding>
             <element signature="e#308#371#0" expanded="true" />
-            <element signature="e#4089#4515#0" />
-            <element signature="e#5091#5689#0" expanded="true" />
+            <element signature="e#5661#6259#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/cpp/include/fastcv.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="508231">
-          <caret line="26827" column="62" selection-start-line="26827" selection-start-column="55" selection-end-line="26827" selection-end-column="62" />
+        <state relative-caret-position="249">
+          <caret line="168" column="33" selection-start-line="168" selection-start-column="33" selection-end-line="168" selection-end-column="33" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/qianzhengwei/libhc/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="32" column="38" lean-forward="true" selection-start-line="32" selection-start-column="38" selection-end-line="32" selection-end-column="38" />
+        <state relative-caret-position="448">
+          <caret line="95" column="45" selection-start-line="95" selection-start-column="45" selection-end-line="95" selection-end-column="45" />
           <folding>
             <element signature="e#671#679#0" expanded="true" />
-            <element signature="e#2550#2980#0" expanded="true" />
-            <element signature="e#2979#2980#0" expanded="true" />
+            <element signature="e#618#626#0" expanded="true" />
+            <element signature="e#3588#4224#0" expanded="true" />
+            <element signature="e#4223#4224#0" expanded="true" />
           </folding>
         </state>
       </provider>

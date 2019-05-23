@@ -13,83 +13,16 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     public native String TestQML();
-    public native void TestQualcommComputeDsp();
+    public native void TestQualcommComputeDsp(int mode);
 
     // Used to load the 'native-lib' library on application startup.
     static {
-        //System.load("/system/vendor/lib/libcdsprpc.so");
-        //System.load("/system/vendor/lib/libfastcvopt.so");
 
     }
 
-   public ArrayList<String> libToCopy = new ArrayList<String>();
+    public ArrayList<String> libToCopy = new ArrayList<String>();
+    public ArrayList<String> libFastCV = new ArrayList<String>();
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        libToCopy.add("libc++.so");
-        libToCopy.add("libcutils.so");
-        libToCopy.add("libcdsprpc.so");
-        //libToCopy.add("libvndksupport.so");
-        //libToCopy.add("libOpenCL_system.so");
-        //libToCopy.add("libOpenCL.so");
-        libToCopy.add("libfastcvopt.so");
-        libToCopy.add("libfastcvadsp_stub.so");
-
-        for(String lib : libToCopy){
-            java.io.File file = new java.io.File("/system/vendor/lib/" + lib);
-            if(!file.exists()){
-                file = new java.io.File("/system/lib/" + lib);
-            }
-            java.io.File localFile = new java.io.File(getCacheDir().getAbsolutePath() + "/" + lib);
-            if(file.exists() && !localFile.exists()) {
-                copyFile(file, localFile);
-            }
-            if(localFile.exists()){
-                System.load(localFile.getAbsolutePath());
-            }
-        }
-/*
-        String filePathSystem = "/system/lib/libfastcvopt.so";
-        String filePathVendor = "/system/vendor/lib/libfastcvopt.so";
-        String localFilePath  = getCacheDir().getAbsolutePath() + "/libfastcvopt.so";
-
-        java.io.File file = new java.io.File(filePathVendor);
-        if(!file.exists()){
-            file = new java.io.File(filePathSystem);
-        }
-        java.io.File localFile = new java.io.File(localFilePath);
-        copyFile(file, localFile);
-        System.load(localFilePath);
-*/
-
-        System.loadLibrary("native-lib");
-
-        // Example of a call to a native method
-        TextView tv = findViewById(R.id.sample_text);
-        tv.setText(stringFromJNI());
-//        String res = TestQML();
-//        Log.d("native-lib", "onCreate: " + res);
-        Thread t = new java.lang.Thread(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        while(true) {
-                            TestQualcommComputeDsp();
-                            try {
-                                java.lang.Thread.sleep(100);
-                            }catch (java.lang.Exception e){
-
-                            }
-                        }
-                    }
-                }
-        );
-        t.start();
-        
-    }
 
     private void copyFile(File from, File to){
         java.io.InputStream in = null;
@@ -119,6 +52,89 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+    boolean supportFastCV = true;
+    private void InitFastCV(){
+        libToCopy.add("libc++.so");
+        libToCopy.add("libcutils.so");
+        libToCopy.add("libcdsprpc.so");
+        //libToCopy.add("libvndksupport.so");
+        //libToCopy.add("libOpenCL_system.so");
+        //libToCopy.add("libOpenCL.so");
+        libToCopy.add("libfastcvopt.so");
+        libToCopy.add("libfastcvadsp_stub.so");
+
+        for(String lib : libToCopy){
+            java.io.File file = new java.io.File("/system/vendor/lib/" + lib);
+            if(!file.exists() || !file.canRead()){
+                file = new java.io.File("/system/lib/" + lib);
+            }
+            java.io.File localFile = new java.io.File(getCacheDir().getAbsolutePath() + "/" + lib);
+            if(!file.exists()){
+                supportFastCV = false;
+            }
+            if(file.exists() && (!localFile.exists() || file.length() != localFile.length())) {
+                copyFile(file, localFile);
+            }
+        }
+        if(supportFastCV) {
+            for (String lib : libToCopy) {
+                java.io.File localFile = new java.io.File(getCacheDir().getAbsolutePath() + "/" + lib);
+                if (localFile.exists()) {
+                    try {
+                        System.load(localFile.getAbsolutePath());
+                    } catch (java.lang.Exception e) {
+                        supportFastCV = false;
+                    }
+                } else {
+                    supportFastCV = false;
+                }
+            }
+        }
+
+        if(!supportFastCV){
+            System.load(getDataDir() + "/lib/libc++.so") ;
+        }
+
+        System.loadLibrary("native-lib");
+
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        InitFastCV();
+
+        // Example of a call to a native method
+        TextView tv = findViewById(R.id.sample_text);
+        tv.setText(stringFromJNI());
+
+        Thread t = new java.lang.Thread(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        while(true) {
+                            if(supportFastCV) {
+                                TestQualcommComputeDsp(0);
+                            }
+                            else{
+                                TestQualcommComputeDsp(3);
+                            }
+                            try {
+                                java.lang.Thread.sleep(100);
+                            }catch (java.lang.Exception e){
+
+                            }
+                        }
+                    }
+                }
+        );
+        t.start();
+        
+    }
+
 
     /**
      * A native method that is implemented by the 'native-lib' native library,

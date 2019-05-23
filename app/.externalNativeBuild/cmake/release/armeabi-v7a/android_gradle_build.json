@@ -1,40 +1,70 @@
+
 {
-  "stringTable": {
-    "0": "O:/Projects/app/.externalNativeBuild/cmake/release/armeabi-v7a",
-    "1": "--target=armv7-none-linux-androideabi --gcc-toolchain=E:/libs/android-ndk-r16b/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64 --sysroot=E:/libs/android-ndk-r16b/sysroot -Dnative_lib_EXPORTS -isystem E:/libs/android-ndk-r16b/sources/cxx-stl/gnu-libstdc++/4.9/include -isystem E:/libs/android-ndk-r16b/sources/cxx-stl/gnu-libstdc++/4.9/libs/armeabi-v7a/include -isystem E:/libs/android-ndk-r16b/sources/cxx-stl/gnu-libstdc++/4.9/include/backward -isystem E:/libs/android-ndk-r16b/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security -std=c++11 -Os -DNDEBUG -fPIC"
-  },
-  "buildFiles": [
-    "E:\\libs\\android-ndk-r16b\\build\\cmake\\android.toolchain.cmake",
-    "O:\\Projects\\app\\src\\main\\cpp\\CMakeLists.txt"
-  ],
-  "cleanCommands": [
-    "E:\\libs\\android-sdk\\cmake\\3.10.2.4988404\\bin\\cmake.exe --build \"O:\\Projects\\app\\.externalNativeBuild\\cmake\\release\\armeabi-v7a\" --target clean"
-  ],
-  "libraries": {
-    "native-lib-Release-armeabi-v7a": {
-      "buildCommand": "E:\\libs\\android-sdk\\cmake\\3.10.2.4988404\\bin\\cmake.exe --build \"O:\\Projects\\app\\.externalNativeBuild\\cmake\\release\\armeabi-v7a\" --target native-lib",
-      "buildType": "release",
-      "toolchain": "3329437009",
-      "abi": "armeabi-v7a",
-      "artifactName": "native-lib",
-      "files": [
-        {
-          "src": "O:\\Projects\\app\\src\\main\\cpp\\native-lib.cpp",
-          "flagsOrdinal": 1,
-          "workingDirectoryOrdinal": 0
-        }
-      ],
-      "headers": [],
-      "output": "O:\\Projects\\app\\build\\intermediates\\cmake\\release\\obj\\armeabi-v7a\\libnative-lib.so"
-    }
-  },
-  "toolchains": {
-    "3329437009": {
-      "cppCompilerExecutable": "E:\\libs\\android-ndk-r16b\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe"
-    }
-  },
-  "cFileExtensions": [],
-  "cppFileExtensions": [
-    "cpp"
-  ]
+	"buildFiles" : [ "O:/hetcomputeDemo/app/src/main/cpp/CMakeLists.txt" ],
+	"cleanCommands" : 
+	[
+		"E:\\libs\\android-sdk\\cmake\\3.6.4111459\\bin\\cmake.exe --build O:\\hetcomputeDemo\\app\\.externalNativeBuild\\cmake\\release\\armeabi-v7a --target clean"
+	],
+	"cppFileExtensions" : [ "cpp" ],
+	"libraries" : 
+	{
+		"fastcvadsp_stub-Release-armeabi-v7a" : 
+		{
+			"abi" : "armeabi-v7a",
+			"artifactName" : "fastcvadsp_stub",
+			"buildType" : "release",
+			"output" : "O:/hetcomputeDemo/app/src/main/cpp/../jniLibs/armeabi-v7a/libfastcvadsp_stub.so",
+			"toolchain" : "1056806119"
+		},
+		"fastcvopt-Release-armeabi-v7a" : 
+		{
+			"abi" : "armeabi-v7a",
+			"artifactName" : "fastcvopt",
+			"buildType" : "release",
+			"output" : "O:/hetcomputeDemo/app/src/main/cpp/../jniLibs/armeabi-v7a/libfastcvopt.so",
+			"toolchain" : "1056806119"
+		},
+		"hetCompute-1.0.0-Release-armeabi-v7a" : 
+		{
+			"abi" : "armeabi-v7a",
+			"artifactName" : "hetCompute-1.0.0",
+			"buildType" : "release",
+			"output" : "O:/hetcomputeDemo/app/src/main/cpp/../jniLibs/armeabi-v7a/libhetCompute-1.0.0.so",
+			"toolchain" : "1056806119"
+		},
+		"native-lib-Release-armeabi-v7a" : 
+		{
+			"abi" : "armeabi-v7a",
+			"artifactName" : "native-lib",
+			"buildCommand" : "E:\\libs\\android-sdk\\cmake\\3.6.4111459\\bin\\cmake.exe --build O:\\hetcomputeDemo\\app\\.externalNativeBuild\\cmake\\release\\armeabi-v7a --target native-lib",
+			"buildType" : "release",
+			"files" : 
+			[
+				
+				{
+					"flags" : "  --target=armv7-none-linux-androideabi21 --gcc-toolchain=E:/libs/android-sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=E:/libs/android-sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64/sysroot  -Dnative_lib_EXPORTS -IO:\\hetcomputeDemo\\app\\src\\main\\cpp\\include  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mfpu=vfpv3-d16 -fno-addrsig -march=armv7-a -mthumb -Wa,--noexecstack -Wformat -Werror=format-security -stdlib=libc++ -std=c++11 -std=c++11 -pthread -fexceptions  -frtti -Ofast -Osize -DHETCOMPUTE_HAVE_QTI_DSP=1 -Oz -DNDEBUG  -fPIC    -c ",
+					"src" : "O:/hetcomputeDemo/app/src/main/cpp/native-lib.cpp",
+					"workingDirectory" : "O:/hetcomputeDemo/app/.externalNativeBuild/cmake/release/armeabi-v7a"
+				}
+			],
+			"output" : "O:/hetcomputeDemo/app/build/intermediates/cmake/release/obj/armeabi-v7a/libnative-lib.so",
+			"toolchain" : "1056806119"
+		},
+		"qml-Release-armeabi-v7a" : 
+		{
+			"abi" : "armeabi-v7a",
+			"artifactName" : "qml",
+			"buildType" : "release",
+			"output" : "O:/hetcomputeDemo/app/src/main/cpp/../jniLibs/armeabi-v7a/libQML-1.1.0.so",
+			"toolchain" : "1056806119"
+		}
+	},
+	"toolchains" : 
+	{
+		"1056806119" : 
+		{
+			"cCompilerExecutable" : "E:/libs/android-sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64/bin/clang.exe",
+			"cppCompilerExecutable" : "E:/libs/android-sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64/bin/clang++.exe"
+		}
+	}
 }

@@ -84,8 +84,27 @@ void cpuMatrixMultiplyf32( const float32_t * __restrict   src1,
 
 }
 
+struct tData
+{
+    float32_t data;
+    float32_t data1;
+    float32_t data2;
+    float32_t data3;
+    float32_t data4;
+    float32_t data5;
+    float32_t data6;
+    float32_t data7;
+    float32_t data8;
+    float32_t data9;
+    int datax1;
+    int datax2;
+    int datax3;
+};
+//#pragma pack(pop)
+
+
 #ifdef _ENABLE_DSP_
-extern "C" JNIEXPORT void JNICALL Java_cn_qianzhengwei_libhc_MainActivity_TestQualcommComputeDsp(){
+extern "C" JNIEXPORT void JNICALL Java_cn_qianzhengwei_libhc_MainActivity_TestQualcommComputeDsp(int mode){
 
 /*
     hetcompute::runtime::init();
@@ -108,15 +127,15 @@ extern "C" JNIEXPORT void JNICALL Java_cn_qianzhengwei_libhc_MainActivity_TestQu
     fcvMemInit();
     fcvMemInitPreAlloc(4 * 1024 * 1024);
     //setup fcv mode to dsp
-    fcvSetOperationMode(fcvOperationMode::FASTCV_OP_LOW_POWER);
+//    fcvSetOperationMode(fcvOperationMode::FASTCV_OP_LOW_POWER);
 //    fcvSetOperationMode(fcvOperationMode::FASTCV_OP_CPU_PERFORMANCE);
 //    fcvSetOperationMode(fcvOperationMode::FASTCV_OP_CPU_OFFLOAD);
-    //dspCV_deinitQ6();
-    //dspCV_initQ6();
+    fcvSetOperationMode((fcvOperationMode)mode);
 
 
-    char versionInfoStr[5];
-    fcvGetVersion((char*)&versionInfoStr, 5);
+
+    char versionInfoStr[16];
+    fcvGetVersion((char*)&versionInfoStr, 16);
     LOGI("$$$ fastCV version: %s",(char*) versionInfoStr);
     if(strcmp("1.7.1", versionInfoStr) == 5){
 
@@ -138,15 +157,36 @@ extern "C" JNIEXPORT void JNICALL Java_cn_qianzhengwei_libhc_MainActivity_TestQu
     LOGI("$$$ fcvDotProducts8: %i", res);
 */
 
-    size_t width = 256;
-
-    float32_t src1[width * width];
+    size_t width = 10;
+/*
+   float32_t src1[width * width];
     float32_t src2[width * width];
     float32_t dst[width * width];
     for(int i=0;i<width * width;i++){
-        src1[i] = i * 2 * 0.1;
-        src2[i] = std::sqrt(i * 0.1);
+        //src1[i] = i * 2 * 0.1;
+        //src2[i] = std::sqrt(i * 0.1);
+        src1[i] = 1;
+        src2[i] = 1;
     }
+ */
+
+       tData src1[width * width];
+       tData src2[width * width];
+       float32_t dst[width * width];
+       for(int i=0;i<width * width;i++){
+           float32_t* ptr = (float32_t*)&src1[i];
+           float32_t* ptr1 = (float32_t*)&src2[i];
+           for(int i=0;i<10;i++){
+               ptr[i] = 1;
+               ptr1[i] = 1;
+           }
+           src1[i].datax1 = i;
+           src1[i].datax2 = i * 2;
+           src1[i].datax3 = i * 3;
+           src2[i].datax1 = i + 1;
+           src2[i].datax2 = i * 2 + 1;
+           src2[i].datax3 = i * 3 + 1;
+       }
 
 /*
     LOGI("$$$ will fcvElementMultiplyf32");
@@ -162,7 +202,6 @@ extern "C" JNIEXPORT void JNICALL Java_cn_qianzhengwei_libhc_MainActivity_TestQu
     }
 */
 
-    float32_t dst1[width];
 
 #ifndef _CPU_TEST_
     LOGI("$$$ fcvMatrixMultiplyf32 time start");
@@ -170,22 +209,24 @@ extern "C" JNIEXPORT void JNICALL Java_cn_qianzhengwei_libhc_MainActivity_TestQu
     fcvMatrixMultiplyf32((const float32_t *)&src1,
             width,
             width,
-            0,
+            sizeof(tData) * width, // 0,//
             (const float32_t *)&src2,
            width,
-             0,
-           (float32_t *)&dst1,
-           0);
+           sizeof(tData) * width, //0,//
+           (float32_t *)&dst,
+              0);
 
+    fcvMemDeInit();
+    fcvCleanUp();
 
     LOGI("$$$ fcvMatrixMultiplyf32 time end");
 
     LOGI("$$$ fcvMatrixMultiplyf32 dst[%i]:%f", 100, dst[100]);
-/*
-    for(int i=0;i<width;i++) {
+
+    for(int i=0;i<width * width;i++) {
         LOGI("$$$ fcvMatrixMultiplyf32 dst[%i]:%f", i, dst[i]);
     }
-*/
+
 #endif
 
 
