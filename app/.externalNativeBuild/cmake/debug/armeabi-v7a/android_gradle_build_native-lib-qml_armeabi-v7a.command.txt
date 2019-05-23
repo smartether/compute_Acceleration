@@ -1,0 +1,8 @@
+Executable : E:\libs\android-sdk\cmake\3.6.4111459\bin\cmake.exe
+arguments : 
+--build
+O:\hetcomputeDemo\app\.externalNativeBuild\cmake\debug\armeabi-v7a
+--target
+native-lib-qml
+jvmArgs : 
+

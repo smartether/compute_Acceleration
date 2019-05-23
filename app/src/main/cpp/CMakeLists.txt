@@ -18,6 +18,11 @@ add_library( # Sets the name of the library.
 
         # Provides a relative path to your source file(s).
         native-lib.cpp)
+add_library(
+        native-lib-qml
+        SHARED
+        native-lib-qml.cpp
+)
 
 add_library(hetCompute-1.0.0 SHARED IMPORTED)
 add_library(fastcvadsp_stub SHARED IMPORTED)
@@ -33,9 +38,15 @@ set_property(TARGET qml PROPERTY IMPORTED_LOCATION "${PROJECT_SOURCE_DIR}/../jni
 
 set(CMAKE_ANDROID_STL_TYPE c++_static)
 
+# fastcv
 target_include_directories(native-lib PRIVATE
             ${PROJECT_SOURCE_DIR}/include
-            E:/libs/android-sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include
+            #E:/libs/android-sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include
+        )
+
+# Qml
+target_include_directories(native-lib-qml PRIVATE
+            ${PROJECT_SOURCE_DIR}/include
         )
 
 
@@ -84,8 +95,15 @@ target_link_libraries( # Specifies the target library.
         #fastcvadsp_stub
         fastcvopt
         #hetCompute-1.0.0
-        qml
+
         android
         # Links the target library to the log library
         # included in the NDK.
         ${log-lib})
+
+target_link_libraries(
+        native-lib-qml
+        qml
+        android
+        ${log-lib}
+)

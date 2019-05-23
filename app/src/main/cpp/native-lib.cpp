@@ -9,9 +9,9 @@
 #include <EGL/egl.h>
 #include <GLES/gl.h>
 
-#include "qml.h"
 #include <android/sensor.h>
 #include <android/log.h>
+#include <android/fdsan.h>
 //#include <android_native_app_glue.h>
 
 //#define _ENABLE_GPU_
@@ -40,6 +40,10 @@
 #define LOGW(...) ((void)__android_log_print(ANDROID_LOG_WARN, "native-activity", __VA_ARGS__))
 
 using namespace std;
+
+extern "C" void LoadLib(){
+
+}
 
 /*
 extern "C" int fastcvadsp_fcvDotProducts8Q( const int8_t* __restrict a,
@@ -102,9 +106,44 @@ struct tData
 };
 //#pragma pack(pop)
 
+typedef float32_t inputData;
 
+//for pinvoke
+extern "C" JNIEXPORT void JNICALL TestQualcommComputeDsp(int width, inputData* src1, inputData* src2, float32_t* dst) {
+    float32_t dstData[width * width];
+    dst = (float32_t*)&dstData;
+    LOGI("$$$ init fcv");
+    fcvMemInit();
+    fcvMemInitPreAlloc(4 * 1024 * 1024);
+    fcvSetOperationMode(fcvOperationMode::FASTCV_OP_LOW_POWER);
+
+    LOGI("$$$ fcvMatrixMultiplyf32 time start");
+
+    fcvMatrixMultiplyf32((const float32_t *)&src1,
+                         width,
+                         width,
+                         sizeof(inputData) * width, // 0,//
+                         (const float32_t *)&src2,
+                         width,
+                         sizeof(inputData) * width, //0,//
+                         (float32_t *)&dst,
+                         0);
+
+    fcvMemDeInit();
+    fcvCleanUp();
+
+    LOGI("$$$ fcvMatrixMultiplyf32 time end");
+
+
+    for(int i=0;i<width * width;i++) {
+        LOGI("$$$ fcvMatrixMultiplyf32 dst[%i]:%f", i, dst[i]);
+    }
+}
+
+
+//for jni
 #ifdef _ENABLE_DSP_
-extern "C" JNIEXPORT void JNICALL Java_cn_qianzhengwei_libhc_MainActivity_TestQualcommComputeDsp(int mode){
+extern "C" JNIEXPORT void JNICALL Java_cn_qianzhengwei_libhc_MainActivity_TestQualcommComputeDsp(JNIEnv *env, jobject, int mode){
 
 /*
     hetcompute::runtime::init();
@@ -209,10 +248,10 @@ extern "C" JNIEXPORT void JNICALL Java_cn_qianzhengwei_libhc_MainActivity_TestQu
     fcvMatrixMultiplyf32((const float32_t *)&src1,
             width,
             width,
-            sizeof(tData) * width, // 0,//
+            sizeof(tData), // 0,//
             (const float32_t *)&src2,
            width,
-           sizeof(tData) * width, //0,//
+           sizeof(tData), //0,//
            (float32_t *)&dst,
               0);
 
@@ -221,7 +260,6 @@ extern "C" JNIEXPORT void JNICALL Java_cn_qianzhengwei_libhc_MainActivity_TestQu
 
     LOGI("$$$ fcvMatrixMultiplyf32 time end");
 
-    LOGI("$$$ fcvMatrixMultiplyf32 dst[%i]:%f", 100, dst[100]);
 
     for(int i=0;i<width * width;i++) {
         LOGI("$$$ fcvMatrixMultiplyf32 dst[%i]:%f", i, dst[i]);
@@ -288,64 +326,3 @@ extern "C" JNIEXPORT jstring JNICALL
 }
 #endif
 
-
-void blas_sgemm(const enum CBLAS_ORDER __Order, const enum CBLAS_TRANSPOSE __TransA,
-        const enum CBLAS_TRANSPOSE __TransB, const int __M, const int __N, const int __K,
-                const float __alpha, const float *__A, const int __lda, const float *__B,
-                const int __ldb, const float __beta, float *__C, const int __ldc){
-    for(int i=0;i<__M * __N; i++){
-
-    }
-}
-
-extern "C" JNIEXPORT jstring JNICALL
-Java_cn_qianzhengwei_libhc_MainActivity_TestQML(
-        JNIEnv *env,
-        jobject /* this */) {
-
-    if(QML_IS_SUPPORTED()){
-        qml_info info;
-        QMLVersionInfo(&info);
-        LOGI("qml type: %i", (int)info.type);
-    }
-
-    const uint32_t matrixSize = 1024*1024;
-    float *A = new float[matrixSize];
-    float *B = new float[matrixSize];
-    float *C = new float[matrixSize];
-    for(uint32_t i=0; i < matrixSize; i++)
-    {
-        A[i] = B[i] = C[i] = 1.0;
-    }
-
-
-
-    cblas_sgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, 1024, 1024, 1024,
-                8.2, A, 1024, B, 1024, 2.6, C, 1024);
-    // << "Value of C[0] is: " << C[0] << endl;
-    char str[16];
-    sprintf(str, "%f", C[0]);
-    jstring  jstr = env->NewStringUTF((const char*)&str);
-    delete[] C;
-    delete[] B;
-    delete[] A;
-    return jstr;
-
-}
-
-
-
-extern "C" JNIEXPORT void JNICALL
-        Java_cn_qianzhengwei_libhc_MainActivity_TestNormal(
-                JNIEnv *env,
-                jobject /* this */) {
-    const uint32_t matrixSize = 1024*1024;
-    float *A = new float[matrixSize];
-    float *B = new float[matrixSize];
-    float *C = new float[matrixSize];
-    for(uint32_t i=0; i < matrixSize; i++)
-    {
-        A[i] = B[i] = C[i] = 1.0;
-    }
-
-}

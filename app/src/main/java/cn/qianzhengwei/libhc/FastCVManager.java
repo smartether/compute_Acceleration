@@ -1,33 +1,20 @@
 package cn.qianzhengwei.libhc;
 
-import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.content.Context;
 import android.util.Log;
-import android.widget.TextView;
 
 import java.io.File;
-import java.lang.annotation.Native;
 import java.util.ArrayList;
-import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
-    /**
-     * A native method that is implemented by the 'native-lib' native library,
-     * which is packaged with this application.
-     */
-    public native String stringFromJNI();
+public class FastCVManager{
 
-    public native String TestQML();
-    public native void TestQualcommComputeDsp(int mode);
-
-    // Used to load the 'native-lib' library on application startup.
-    static {
-
+    private static FastCVManager _instance;
+    public static FastCVManager Get(){
+        if(_instance == null)
+            _instance = new FastCVManager();
+        return _instance;
     }
 
-    {
-/*
     public ArrayList<String> libToCopy = new ArrayList<String>();
     public ArrayList<String> libFastCV = new ArrayList<String>();
 
@@ -62,7 +49,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     boolean supportFastCV = true;
-    private void InitFastCV(){
+
+    public boolean SupportFastCV(){return supportFastCV;}
+
+    public boolean InitFastCV(String targetPath){
+        //String targetPath = ctx.getCacheDir().getAbsolutePath();
         libToCopy.add("libc++.so");
         libToCopy.add("libcutils.so");
         libToCopy.add("libcdsprpc.so");
@@ -77,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
             if(!file.exists() || !file.canRead()){
                 file = new java.io.File("/system/lib/" + lib);
             }
-            java.io.File localFile = new java.io.File(getCacheDir().getAbsolutePath() + "/" + lib);
+            java.io.File localFile = new java.io.File(targetPath + "/" + lib);
             if(!file.exists()){
                 supportFastCV = false;
             }
@@ -87,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         }
         if(supportFastCV) {
             for (String lib : libToCopy) {
-                java.io.File localFile = new java.io.File(getCacheDir().getAbsolutePath() + "/" + lib);
+                java.io.File localFile = new java.io.File(targetPath + "/" + lib);
                 if (localFile.exists()) {
                     try {
                         System.load(localFile.getAbsolutePath());
@@ -101,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else{
             for (String lib : libToCopy) {
-                java.io.File localFile = new java.io.File(getCacheDir().getAbsolutePath() + "/" + lib);
+                java.io.File localFile = new java.io.File(targetPath + "/" + lib);
                 if(localFile.exists()){
                     localFile.delete();
                 }
@@ -122,53 +113,7 @@ public class MainActivity extends AppCompatActivity {
             Log.d("native-lib", "$$$load native-lib-qml");
         }
 
+        return supportFastCV;
     }
-*/
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        final boolean supportFastCV = FastCVManager.Get().InitFastCV(getCacheDir().getAbsolutePath());
-
-        // Example of a call to a native method
-        TextView tv = findViewById(R.id.sample_text);
-        if(supportFastCV) {
-            //tv.setText(stringFromJNI());
-        }
-        else {
-            tv.setText("not support fastcv");
-        }
-
-        Thread t = new java.lang.Thread(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        while(true) {
-                            if(supportFastCV) {
-                                TestQualcommComputeDsp(0);
-                            }
-                            else{
-                                //TestQualcommComputeDsp(3);
-                                TestQML();
-                                //Log.i("native-lib", "$$$$$ this device doesn't support fastcv. ");
-                            }
-                            try {
-                                java.lang.Thread.sleep(100);
-                            }catch (java.lang.Exception e){
-
-                            }
-                        }
-                    }
-                }
-        );
-        t.start();
-        
-    }
-
-
 
 }
-

@@ -1,9 +1,12 @@
+
 apply plugin: 'com.android.application'
+
+//apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "cn.qianzhengwei.libhc"
+        //applicationId "cn.qianzhengwei.libhc"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
