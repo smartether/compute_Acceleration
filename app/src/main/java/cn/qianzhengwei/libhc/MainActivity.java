@@ -92,11 +92,10 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        if(!supportFastCV){
-            System.load(getDataDir() + "/lib/libc++.so") ;
+        if(supportFastCV){
+            System.loadLibrary("native-lib");
         }
 
-        System.loadLibrary("native-lib");
 
     }
 
@@ -109,7 +108,12 @@ public class MainActivity extends AppCompatActivity {
 
         // Example of a call to a native method
         TextView tv = findViewById(R.id.sample_text);
-        tv.setText(stringFromJNI());
+        if(supportFastCV) {
+            tv.setText(stringFromJNI());
+        }
+        else {
+            tv.setText("not support fastcv");
+        }
 
         Thread t = new java.lang.Thread(
                 new Runnable() {
@@ -120,7 +124,8 @@ public class MainActivity extends AppCompatActivity {
                                 TestQualcommComputeDsp(0);
                             }
                             else{
-                                TestQualcommComputeDsp(3);
+                                //TestQualcommComputeDsp(3);
+                                Log.i("native-lib", "$$$$$ this device doesn't support fastcv. ");
                             }
                             try {
                                 java.lang.Thread.sleep(100);

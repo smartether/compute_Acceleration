@@ -57,7 +57,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -pthread -fexceptions  -frtti
 #if(ANDROID_ABI STREQUAL "arm64-v8a")
 #    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -u ANativeActivity_onCreate   -Wl,--allow-shlib-undefined -static-libstdc++")
 #else()
-    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -static-libstdc++ -Wl,--allow-shlib-undefined  -Wl,--hash-style=both") # -u ANativeActivity_onCreate
+    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -static-libstdc++ -Wl,--allow-shlib-undefined  -Wl,--hash-style=both -W1,-fuse-ld=bfd") # -u ANativeActivity_onCreate
 #endif()
 
 
