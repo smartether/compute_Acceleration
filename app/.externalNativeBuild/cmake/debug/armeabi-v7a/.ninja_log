@@ -30,3 +30,7 @@
 5655	7031	0	O:/hetcomputeDemo/app/build/intermediates/cmake/debug/obj/armeabi-v7a/libnative-lib.so	7eecd17f65974da
 3	4552	0	CMakeFiles/native-lib.dir/native-lib.cpp.o	e446272e80aa0494
 4552	5552	0	O:/hetcomputeDemo/app/build/intermediates/cmake/debug/obj/armeabi-v7a/libnative-lib.so	7eecd17f65974da
+87	21808	0	CMakeFiles/native-lib-qml.dir/native-lib-qml.cpp.o	88a3cdef22a0c737
+21809	24999	0	O:/hetcomputeDemo/app/build/intermediates/cmake/debug/obj/armeabi-v7a/libnative-lib-qml.so	2055b8a4c677d957
+3	9190	0	CMakeFiles/native-lib.dir/native-lib.cpp.o	e446272e80aa0494
+9190	11624	0	O:/hetcomputeDemo/app/build/intermediates/cmake/debug/obj/armeabi-v7a/libnative-lib.so	7eecd17f65974da

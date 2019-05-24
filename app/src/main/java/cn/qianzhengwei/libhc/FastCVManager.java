@@ -5,6 +5,9 @@ import android.util.Log;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FastCVManager{
     private static native void InitLib(boolean supportFastCV);
@@ -17,6 +20,7 @@ public class FastCVManager{
 
     public static ArrayList<String> libToCopy = new ArrayList<String>();
     public static ArrayList<String> libFastCV = new ArrayList<String>();
+    public static Map<String, Boolean> libRequiredOrOption = new HashMap<>();
 
 
     private static void copyFile(File from, File to){
@@ -33,13 +37,14 @@ public class FastCVManager{
             }
         }
         catch (java.lang.Exception e) {
-
+            Log.w("native-lib", "copyFile exception: " + e.toString() );
         }
         finally {
             if (in != null) {
                 try {
                     in.close();
                     out.close();
+                    to.setReadable(true);
                 }
                 catch (java.io.IOException e) {
 
@@ -52,16 +57,34 @@ public class FastCVManager{
 
     public static boolean SupportFastCV(){return supportFastCV;}
 
+    static boolean inited = false;
+
     public static boolean InitFastCV(String targetPath){
+        Log.i("native-lib", "InitFastCV targetPath: " + targetPath);
+        if(inited) return supportFastCV;
+        inited = true;
         //String targetPath = ctx.getCacheDir().getAbsolutePath();
         libToCopy.add("libc++.so");
+        libToCopy.add("libstdc++.so");
         libToCopy.add("libcutils.so");
+        libToCopy.add("libvndksupport.so");
+        libToCopy.add("libOpenCL_system.so");
+        libToCopy.add("libOpenCL.so");
         libToCopy.add("libcdsprpc.so");
-        //libToCopy.add("libvndksupport.so");
-        //libToCopy.add("libOpenCL_system.so");
-        //libToCopy.add("libOpenCL.so");
         libToCopy.add("libfastcvopt.so");
         libToCopy.add("libfastcvadsp_stub.so");
+
+        libRequiredOrOption.put("libc++.so", false);
+        libRequiredOrOption.put("libstdc++.so", false);
+        libRequiredOrOption.put("libcutils.so", false);
+        libRequiredOrOption.put("libvndksupport.so", false);
+        libRequiredOrOption.put("libOpenCL_system.so", false);
+        libRequiredOrOption.put("libOpenCL.so", false);
+        libRequiredOrOption.put("libcdsprpc.so", true);
+        libRequiredOrOption.put("libfastcvopt.so", true);
+        libRequiredOrOption.put("libfastcvadsp_stub.so", true);
+
+
 
         for(String lib : libToCopy){
             java.io.File file = new java.io.File("/system/vendor/lib/" + lib);
@@ -70,7 +93,10 @@ public class FastCVManager{
             }
             java.io.File localFile = new java.io.File(targetPath + "/" + lib);
             if(!file.exists()){
-                supportFastCV = false;
+                if(libRequiredOrOption.containsKey(lib) && libRequiredOrOption.get(lib)) {
+                    supportFastCV = false;
+                }
+                Log.w("native-lib", "InitFastCV file " + file.getAbsolutePath() + " not exist." );
             }
             if(file.exists() && (!localFile.exists() || file.length() != localFile.length())) {
                 copyFile(file, localFile);
@@ -83,10 +109,16 @@ public class FastCVManager{
                     try {
                         System.load(localFile.getAbsolutePath());
                     } catch (java.lang.Exception e) {
-                        supportFastCV = false;
+                        if(libRequiredOrOption.containsKey(lib) && libRequiredOrOption.get(lib)) {
+                            supportFastCV = false;
+                        }
+                        Log.w("native-lib", "InitFastCV exception: " + e.toString() );
                     }
                 } else {
-                    supportFastCV = false;
+                    if(libRequiredOrOption.containsKey(lib) && libRequiredOrOption.get(lib)) {
+                        supportFastCV = false;
+                    }
+                    Log.w("native-lib", "InitFastCV lib " + lib + " not found..."  );
                 }
             }
         }
@@ -114,6 +146,7 @@ public class FastCVManager{
         }
 
 //        InitLib(supportFastCV);
+        Log.d("native-lib", "InitFastCV support faseCV: " + supportFastCV);
         return supportFastCV;
     }
 
