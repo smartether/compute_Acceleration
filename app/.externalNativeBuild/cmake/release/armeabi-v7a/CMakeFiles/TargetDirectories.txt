@@ -1,3 +1,4 @@
 O:/hetcomputeDemo/app/.externalNativeBuild/cmake/release/armeabi-v7a/CMakeFiles/native-lib.dir
+O:/hetcomputeDemo/app/.externalNativeBuild/cmake/release/armeabi-v7a/CMakeFiles/native-lib-qml.dir
 O:/hetcomputeDemo/app/.externalNativeBuild/cmake/release/armeabi-v7a/CMakeFiles/edit_cache.dir
 O:/hetcomputeDemo/app/.externalNativeBuild/cmake/release/armeabi-v7a/CMakeFiles/rebuild_cache.dir

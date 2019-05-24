@@ -196,7 +196,10 @@ Project_SOURCE_DIR:STATIC=O:/hetcomputeDemo/app/src/main/cpp
 log-lib:FILEPATH=E:/libs/android-sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/liblog.so
 
 //Dependencies for the target
-native-lib_LIB_DEPENDS:STATIC=general;fastcvopt;general;qml;general;android;general;E:/libs/android-sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/liblog.so;
+native-lib-qml_LIB_DEPENDS:STATIC=general;qml;general;android;general;E:/libs/android-sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/liblog.so;
+
+//Dependencies for the target
+native-lib_LIB_DEPENDS:STATIC=general;fastcvopt;general;android;general;E:/libs/android-sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/liblog.so;
 
 
 ########################

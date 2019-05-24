@@ -41,6 +41,8 @@
 
 using namespace std;
 
+extern "C" JNIEXPORT void JNICALL Java_cn_qianzhengwei_libhc_MainActivity_TestQualcommComputeDsp(JNIEnv *env, jobject, int mode);
+
 extern "C" void LoadLib(){
 
 }
@@ -109,31 +111,119 @@ struct tData
 typedef float32_t inputData;
 
 //for pinvoke
-extern "C" JNIEXPORT void JNICALL TestQualcommComputeDsp(int width, inputData* src1, inputData* src2, float32_t* dst) {
-    float32_t dstData[width * width];
-    dst = (float32_t*)&dstData;
+extern "C" JNIEXPORT void JNICALL TestQualcommComputeDsp(int width, float32_t* srcInput1, float32_t* srcInput2, float32_t* dstOut) {
+
+
     LOGI("$$$ init fcv");
     fcvMemInit();
     fcvMemInitPreAlloc(4 * 1024 * 1024);
     fcvSetOperationMode(fcvOperationMode::FASTCV_OP_LOW_POWER);
+
+/*
+    float32_t src1Data[width * width];
+    float32_t src2Data[width * width];
+    for(int i=0;i<width * width;i++) {
+        src1Data[i] = 1;
+        src2Data[i] = 1;
+    }
+    float32_t* src1 = (float32_t *)&src1Data;
+    float32_t* src2 = (float32_t *)&src2Data;
+*/
+
+    LOGI("$$$ fcvMatrixMultiplyf32 time start");
+
+    float32_t dst[width * width];
+
+
+    fcvMatrixMultiplyf32((const float32_t *)srcInput1,
+                         width,
+                         width,
+                         sizeof(float32_t) * width, //0,//
+                         (const float32_t *)srcInput2,
+                         width,
+                          sizeof(float32_t) * width, //0,//
+                         (float32_t *)&dst,
+                         0);
+
+
+/*
+    width = 8;
+    float32_t src1[width * width];
+    float32_t src2[width * width];
+    float32_t dst[width * width];
+    for(int i=0;i<width * width;i++){
+        float32_t* ptr = (float32_t*)&src1[i];
+        float32_t* ptr1 = (float32_t*)&src2[i];
+        for(int i=0;i<1;i++){
+            ptr[i] = 1;
+            ptr1[i] = 1;
+        }
+
+    }
+
 
     LOGI("$$$ fcvMatrixMultiplyf32 time start");
 
     fcvMatrixMultiplyf32((const float32_t *)&src1,
                          width,
                          width,
-                         sizeof(inputData) * width, // 0,//
+                         4 * width,//
                          (const float32_t *)&src2,
                          width,
-                         sizeof(inputData) * width, //0,//
+                         4 * width,//
                          (float32_t *)&dst,
                          0);
+
+*/
+
+
+/*
+    width = 8;
+    tData src1[width * width];
+    tData src2[width * width];
+    float32_t dst[width * width];
+    for(int i=0;i<width * width;i++){
+        float32_t* ptr = (float32_t*)&src1[i];
+        float32_t* ptr1 = (float32_t*)&src2[i];
+        for(int i=0;i<10;i++){
+            ptr[i] = 1;
+            ptr1[i] = 1;
+        }
+        src1[i].datax1 = i;
+        src1[i].datax2 = i * 2;
+        src1[i].datax3 = i * 3;
+        src2[i].datax1 = i + 1;
+        src2[i].datax2 = i * 2 + 1;
+        src2[i].datax3 = i * 3 + 1;
+    }
+
+
+    LOGI("$$$ fcvMatrixMultiplyf32 time start");
+
+    fcvMatrixMultiplyf32((const float32_t *)&src1,
+                         width,
+                         width,
+                         sizeof(tData), // 0,//
+                         (const float32_t *)&src2,
+                         width,
+                         sizeof(tData), //0,//
+                         (float32_t *)&dst,
+                         0);
+
+*/
+
 
     fcvMemDeInit();
     fcvCleanUp();
 
     LOGI("$$$ fcvMatrixMultiplyf32 time end");
 
+    for(int i=0;i<width * width;i++) {
+        LOGI("$$$ fcvMatrixMultiplyf32 src1[%i]:%f", i, srcInput1[i]);
+    }
+    for(int i=0;i<width * width;i++) {
+        LOGI("$$$ fcvMatrixMultiplyf32 src2[%i]:%f", i, srcInput2[i]);
+    }
 
     for(int i=0;i<width * width;i++) {
         LOGI("$$$ fcvMatrixMultiplyf32 dst[%i]:%f", i, dst[i]);

@@ -83,6 +83,13 @@
                 <item name="hetcomputeDemo" type="f1a62948:ProjectNode" />
                 <item name=":app" type="2d1252cf:ModuleNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="hetcomputeDemo" type="f1a62948:ProjectNode" />
+                <item name=":app" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="other" type="c8890929:TasksNode$1" />
               </path>
             </expand>
@@ -106,7 +113,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/qianzhengwei/libhc/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="570">
+            <state relative-caret-position="228">
               <caret line="137" column="24" selection-start-line="137" selection-start-column="11" selection-end-line="137" selection-end-column="24" />
               <folding>
                 <element signature="initializer##1;class#MainActivity#0" />
@@ -120,22 +127,41 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/cpp/native-lib.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-6">
-              <caret line="112" column="37" selection-start-line="112" selection-start-column="37" selection-end-line="112" selection-end-column="37" />
+            <state relative-caret-position="266">
+              <caret line="141" column="54" lean-forward="true" selection-start-line="141" selection-start-column="54" selection-end-line="141" selection-end-column="54" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
                 <element signature="e#910#1359#0" />
                 <element signature="e#910#2428#0" />
+                <element signature="e#7066#7521#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://E:/libs/android-sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/jni.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="172">
+              <caret line="1105" column="8" selection-start-line="1105" selection-start-column="8" selection-end-line="1105" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/cpp/include/fastcv.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2859">
+              <caret line="30965" column="51" selection-start-line="30965" selection-start-column="43" selection-end-line="30965" selection-end-column="51" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/qianzhengwei/libhc/FastCVManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="111" column="13" lean-forward="true" selection-start-line="111" selection-start-column="13" selection-end-line="111" selection-end-column="13" />
+            <state relative-caret-position="1066">
+              <caret line="112" column="58" selection-start-line="112" selection-start-column="58" selection-end-line="112" selection-end-column="58" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#314#322#0" expanded="true" />
@@ -180,27 +206,6 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://E:/libs/android-sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/android/asset_manager.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="47">
-              <caret line="63" column="24" selection-start-line="63" selection-start-column="15" selection-end-line="63" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://E:/libs/android-sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/android/trace.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="71" column="37" selection-start-line="71" selection-start-column="25" selection-end-line="71" selection-end-column="40" />
-              <folding>
-                <element signature="e#2526#2528#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -212,36 +217,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>support</find>
-      <find>fcvOperationMode</find>
-      <find>stride</find>
-      <find>float32_t</find>
-      <find>fcvMatrixMultiplyf32</find>
-      <find>dst1</find>
-      <find>dotproductf32</find>
-      <find>data</find>
-      <find>left</find>
-      <find>tData</find>
-      <find>libToCopy</find>
-      <find>src2Stride</find>
-      <find>low_pow</find>
-      <find>localFile</find>
-      <find>gemm</find>
-      <find>Java_cn_qianzhengwei_libhc_MainActivity_TestQML</find>
-      <find>target_include_directories</find>
-      <find>$$$</find>
-      <find>$$</find>
-      <find>TestQML</find>
       <find>stringFromJNI</find>
       <find>getca</find>
       <find>applicationId</find>
       <find>crash</find>
-      <find>qml</find>
       <find>TestQualcommComputeDsp</find>
       <find>getCacheDir</find>
-      <find>dst</find>
       <find>width</find>
+      <find>dstData</find>
+      <find>fcvMemDeInit</find>
+      <find>Java_cn_qianzhengwei_libhc_MainActivity_TestQualcommComputeDsp</find>
+      <find>inputData</find>
+      <find>FASTCV_OP_LOW_POWER</find>
+      <find>fcvMatrixMultiplyf32</find>
+      <find>ptr</find>
+      <find>src1Data</find>
+      <find>qml</find>
       <find>supportFastCV</find>
+      <find>count</find>
+      <find>block</find>
+      <find>pipe</find>
+      <find>dotproductf32</find>
+      <find>cross</find>
+      <find>project</find>
+      <find>projectpoint</find>
+      <find>crossproduct3x</find>
+      <find>crossproduct</find>
+      <find>crossproduct3x1f32</find>
+      <find>dst</find>
+      <find>deter</find>
+      <find>determin</find>
     </findStrings>
     <replaceStrings>
       <replace>/</replace>
@@ -304,6 +309,11 @@
             </path>
             <path>
               <item name="hetcomputeDemo" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="jniLibs" type="edd41e36:AndroidSourceTypeNode" />
+            </path>
+            <path>
+              <item name="hetcomputeDemo" type="1abcf292:AndroidViewProjectNode" />
               <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
             </path>
           </expand>
@@ -314,6 +324,10 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="DEBUGGABLE_DEVICE" value="vivo-vivo_z1-c17290ba" />
+    <property name="DEBUGGABLE_PROCESS" value="cn.qianzhengwei.libhc" />
+    <property name="DEBUGGER_ID" value="Auto" />
+    <property name="SHOW_ALL_PROCESSES" value="false" />
     <property name="android.sdk.path" value="E:/libs/android-sdk" />
     <property name="device.picker.selection" value="c17290ba" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../fastCVDemo/export/fastCVDemo" />
@@ -535,14 +549,14 @@
       <window_info id="Designer" order="6" />
       <window_info id="Resources Explorer" order="7" />
       <window_info id="Capture Tool" order="8" />
-      <window_info active="true" anchor="bottom" id="Run" order="0" sideWeight="0.91320294" visible="true" weight="0.3295964" />
-      <window_info anchor="bottom" x="61" y="327" width="1385" height="420" id="Logcat" order="1" type="WINDOWED" weight="0.33370662" />
+      <window_info active="true" anchor="bottom" id="Run" order="0" sideWeight="0.9125917" visible="true" weight="0.3295964" />
+      <window_info anchor="bottom" x="90" y="245" width="1385" height="509" id="Logcat" order="1" type="WINDOWED" visible="true" weight="0.33370662" />
       <window_info anchor="bottom" id="TODO" order="2" sideWeight="0.49938875" weight="0.32847533" />
-      <window_info anchor="bottom" id="Debug" order="3" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49938875" weight="0.3295964" />
       <window_info anchor="bottom" id="Terminal" order="4" weight="0.32922733" />
-      <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.086797066" side_tool="true" visible="true" weight="0.3295964" />
+      <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.08740831" side_tool="true" visible="true" weight="0.3295964" />
       <window_info anchor="bottom" id="Version Control" order="6" />
-      <window_info anchor="bottom" id="Build" order="7" sideWeight="0.7176039" weight="0.32847533" />
+      <window_info anchor="bottom" id="Build" order="7" sideWeight="0.7169927" weight="0.32847533" />
       <window_info anchor="bottom" id="Find" order="8" />
       <window_info anchor="bottom" id="Android Profiler" order="9" />
       <window_info anchor="right" id="Device File Explorer" order="0" sideWeight="0.14548495" side_tool="true" visible="true" weight="0.22982885" />
@@ -614,13 +628,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="354">
           <caret line="162" column="13" selection-start-line="162" selection-start-column="13" selection-end-line="162" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://E:/libs/android-sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/jni.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="839" column="12" selection-start-line="839" selection-start-column="12" selection-end-line="839" selection-end-column="12" />
         </state>
       </provider>
     </entry>
@@ -815,13 +822,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/cpp/include/fastcv.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="168" column="33" selection-start-line="168" selection-start-column="33" selection-end-line="168" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/cpp/include/qml_cblas3.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="181">
@@ -883,13 +883,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/cpp/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="108" column="1" selection-start-line="108" selection-start-column="1" selection-end-line="108" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/cpp/native-lib-qml.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1026">
@@ -918,21 +911,9 @@
       </provider>
       <provider editor-type-id="android-manifest" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/cpp/native-lib.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6">
-          <caret line="112" column="37" selection-start-line="112" selection-start-column="37" selection-end-line="112" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#16#0" expanded="true" />
-            <element signature="e#910#1359#0" />
-            <element signature="e#910#2428#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/qianzhengwei/libhc/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
+        <state relative-caret-position="228">
           <caret line="137" column="24" selection-start-line="137" selection-start-column="11" selection-end-line="137" selection-end-column="24" />
           <folding>
             <element signature="initializer##1;class#MainActivity#0" />
@@ -942,14 +923,48 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/cpp/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="108" column="1" selection-start-line="108" selection-start-column="1" selection-end-line="108" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/qianzhengwei/libhc/FastCVManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="111" column="13" lean-forward="true" selection-start-line="111" selection-start-column="13" selection-end-line="111" selection-end-column="13" />
+        <state relative-caret-position="1066">
+          <caret line="112" column="58" selection-start-line="112" selection-start-column="58" selection-end-line="112" selection-end-column="58" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#314#322#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/cpp/native-lib.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="141" column="54" lean-forward="true" selection-start-line="141" selection-start-column="54" selection-end-line="141" selection-end-column="54" />
+          <folding>
+            <element signature="e#0#16#0" expanded="true" />
+            <element signature="e#910#1359#0" />
+            <element signature="e#910#2428#0" />
+            <element signature="e#7066#7521#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://E:/libs/android-sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/jni.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="1105" column="8" selection-start-line="1105" selection-start-column="8" selection-end-line="1105" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/cpp/include/fastcv.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2859">
+          <caret line="30965" column="51" selection-start-line="30965" selection-start-column="43" selection-end-line="30965" selection-end-column="51" />
         </state>
       </provider>
     </entry>
