@@ -7,7 +7,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class FastCVManager{
-
+    private static native void InitLib(boolean supportFastCV);
     private static FastCVManager _instance;
     public static FastCVManager Get(){
         if(_instance == null)
@@ -15,11 +15,11 @@ public class FastCVManager{
         return _instance;
     }
 
-    public ArrayList<String> libToCopy = new ArrayList<String>();
-    public ArrayList<String> libFastCV = new ArrayList<String>();
+    public static ArrayList<String> libToCopy = new ArrayList<String>();
+    public static ArrayList<String> libFastCV = new ArrayList<String>();
 
 
-    private void copyFile(File from, File to){
+    private static void copyFile(File from, File to){
         java.io.InputStream in = null;
         java.io.OutputStream out = null;
         try {
@@ -48,11 +48,11 @@ public class FastCVManager{
         }
     }
 
-    boolean supportFastCV = true;
+    static boolean  supportFastCV = true;
 
-    public boolean SupportFastCV(){return supportFastCV;}
+    public static boolean SupportFastCV(){return supportFastCV;}
 
-    public boolean InitFastCV(String targetPath){
+    public static boolean InitFastCV(String targetPath){
         //String targetPath = ctx.getCacheDir().getAbsolutePath();
         libToCopy.add("libc++.so");
         libToCopy.add("libcutils.so");
@@ -105,7 +105,7 @@ public class FastCVManager{
         else{
             Log.d("native-lib", "$$$will load native-lib-qml");
             try {
-                System.loadLibrary("native-lib-qml");
+                //System.loadLibrary("native-lib-qml");
             }
             catch(java.lang.Exception e){
                 Log.d("native-lib", "$$" + e.toString());
@@ -113,6 +113,7 @@ public class FastCVManager{
             Log.d("native-lib", "$$$load native-lib-qml");
         }
 
+//        InitLib(supportFastCV);
         return supportFastCV;
     }
 
