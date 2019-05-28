@@ -21,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     public native String TestQML();
     public native void TestQualcommComputeDsp(int mode);
 
+    private native void RoleCul();
+
     // Used to load the 'native-lib' library on application startup.
     static {
 
@@ -148,11 +150,12 @@ public class MainActivity extends AppCompatActivity {
                     public void run() {
                         while(true) {
                             if(supportFastCV) {
-                                TestQualcommComputeDsp(0);
+//                                TestQualcommComputeDsp(0);
+                                RoleCul();
                             }
                             else{
                                 //TestQualcommComputeDsp(3);
-                                TestQML();
+                                //TestQML();
                                 //Log.i("native-lib", "$$$$$ this device doesn't support fastcv. ");
                             }
                             try {

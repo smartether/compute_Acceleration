@@ -12,6 +12,7 @@
 #include <android/sensor.h>
 #include <android/log.h>
 #include <android/fdsan.h>
+#include <random>
 //#include <android_native_app_glue.h>
 
 //#define _ENABLE_GPU_
@@ -67,6 +68,8 @@ extern "C" void fastcvadsp_fcvQ6SessionInit();
 extern "C" void fastcvadsp_fcvQ6SessionDeInit();
 */
 
+
+// matrix dot
 void cpuMatrixMultiplyf32( const float32_t * __restrict   src1,
                       uint32_t                       src1Width,
                       uint32_t                       src1Height,
@@ -85,7 +88,7 @@ void cpuMatrixMultiplyf32( const float32_t * __restrict   src1,
         for(int l=0;l<src2Width;l++) {
             for (int n = 0; n < src1Width; n++) {
                 int idxSrc1 = m * src1Width + n;
-                int idxSrc2 = src2Width * n + l ;
+                int idxSrc2 = src2Width * n + l;
                 float32_t src1Value = src1[idxSrc1];
                 float32_t src2Value = src2[idxSrc2];
                 dst[m] += src1Value * src2Value;
@@ -113,6 +116,170 @@ struct tData
     int datax3;
 };
 //#pragma pack(pop)
+
+
+
+
+extern "C" JNIEXPORT void JNICALL NeighborMatrix(int width, int height, float32_t* src, float32_t* dst){
+    uint8_t*  inputX = nullptr;
+    uint8_t* inputOne = nullptr;
+    uint8_t* inputTwo = nullptr;
+    uint8_t* outputXAndOne = nullptr;
+    fcvBitwiseAndu8(inputX, width, height, 0, inputOne, 0, outputXAndOne, 0);
+    //fcvMultiplyScalars16(outputXAndOne, width, height, 0, -1, 0, outputXAndOne, 0);
+
+    int16_t* subtractDst = nullptr;
+
+}
+
+//miniMax
+//fcvMinMaxLocf32
+
+extern "C" JNIEXPORT void JNICALL RoleCul(int width, int height,
+        float32_t* A_arg, float32_t* B_arg, float32_t* C_arg,
+        float32_t* startPos_arg, float32_t* dstPos_arg,
+        float32_t* time_arg, float32_t* lOrC_arg, float32_t* dst){
+
+    float32_t* lOrC = lOrC_arg;
+    // start Pos
+    float32_t* startPos = startPos_arg;
+    // dst pos
+    float32_t* dstPos = dstPos_arg;
+    // time
+    float32_t* time = time_arg;
+    // 1 - startPos
+    float32_t* invStartPos = (float32_t*)fcvMemAlloc(4 * width * height, 16);
+    // dst pos - start Pos
+    float32_t* delta = (float32_t*)fcvMemAlloc(4 * width * height, 16);
+    // (d - s)
+    float32_t* deltaMulTime = (float32_t*)fcvMemAlloc(4 * width * height, 16);
+    // num -1
+    float32_t* invOne = (float32_t*) fcvMemAlloc(4 * width * height, 16);
+
+    float32_t* tmpDst =  (float32_t*) fcvMemAlloc(4 * width * height, 16);
+    float32_t* tmp = (float32_t*)fcvMemAlloc(4 * width * height, 16);
+    float32_t* tmp1 = (float32_t*)fcvMemAlloc(4 * width * height, 16);
+    float32_t* tmp2 = (float32_t*)fcvMemAlloc(4 * width * height, 16);
+    float32_t* tmpRes = (float32_t*)fcvMemAlloc(4 * width * height, 16);
+    float32_t* tPow2 = (float32_t*)fcvMemAlloc(4 * width * height, 16);
+    float32_t* invTime = (float32_t*)fcvMemAlloc(4 * width * height, 16);
+    float32_t* oneSubT = (float32_t*)fcvMemAlloc(4 * width * height, 16);
+    float32_t* oneSubTPow2 = (float32_t*)fcvMemAlloc(4 * width * height, 16);
+    float32_t* timePow2 = (float32_t*)fcvMemAlloc(4 * width * height, 16);
+
+
+
+    // -s
+//    fcvElementMultiplyf32(startPos, width, height, 0, invOne, 0, invStartPos, 0);
+    fcvMultiplyScalarf32(startPos, width, height, 0, -1, invStartPos, 0);
+
+    // (d - s)
+    fcvAddf32(dstPos, width, height, 0, invStartPos, 0, delta, 0);
+    // (d - s)t
+    fcvElementMultiplyf32(delta, width, height, 0, time, 0, deltaMulTime, 0);
+    //s + (d - s)t
+    fcvAddf32(startPos, width, height, 0, deltaMulTime, 0, tmpDst, 0);
+    fcvElementMultiplyf32(tmpDst, width, height, 0, lOrC, 0, tmpDst, 0);
+
+    float32_t* A = A_arg;
+    float32_t* B = B_arg;
+    float32_t* C = C_arg;
+
+
+
+    fcvMultiplyScalarf32(time, width, height, 0, -1, invTime, 0);
+    fcvAddScalarf32(invTime, width, height, 0, 1, oneSubT, 0);
+    fcvElementMultiplyf32 (time, width, height, 0, time, 0, timePow2, 0);
+    fcvElementMultiplyf32 (oneSubT, width, height, 0, oneSubT, 0, timePow2, 0);
+
+    fcvElementMultiplyf32(A, width, height, 0, timePow2, 0, tmp, 0);
+    fcvElementMultiplyf32(B, width, height, 0, oneSubT, 0, tmp1, 0);
+    //TODO tmp1 input tmp1 output
+    fcvElementMultiplyf32(tmp1, width, height, 0, time, 0, tmp1, 0);
+    fcvElementMultiplyf32(C, width, height, 0, oneSubTPow2, 0, tmp2, 0);
+    fcvAddf32(tmp, width, height, 0, tmp1, 0, tmpRes, 0);
+    fcvAddf32(tmp2, width, height, 0, tmpRes, 0, tmpRes, 0);
+
+    fcvMultiplyScalarf32(lOrC, width, height, 0, -1, lOrC, 0);
+    fcvAddScalarf32(lOrC, width, height, 0, 1, lOrC, 0);
+    fcvElementMultiplyf32(tmpRes, width, height, 0, lOrC, 0, tmpRes, 0);
+
+    fcvAddf32(tmpDst, width, height, 0, tmpRes, 0, dst, 0);
+
+
+    //dealloc
+    fcvMemFree(invStartPos);
+    fcvMemFree(delta);
+    fcvMemFree(deltaMulTime);
+    fcvMemFree(invOne);
+    fcvMemFree(tmpDst);
+    fcvMemFree(tmp);
+    fcvMemFree(tmp2);
+    fcvMemFree(tmpRes);
+    fcvMemFree(tPow2);
+    fcvMemFree(invTime);
+    fcvMemFree(oneSubT);
+    fcvMemFree(oneSubTPow2);
+    fcvMemFree(timePow2);
+}
+
+
+extern "C" JNIEXPORT void JNICALL Java_cn_qianzhengwei_libhc_MainActivity_RoleCul(JNIEnv* env, jobject obj){
+
+    int width = 3;
+    int height = 10000;
+    int blockSize = height * width;
+
+    float32_t A[blockSize];
+    float32_t B[blockSize];
+    float32_t C[blockSize];
+    float32_t startPos[blockSize];
+    float32_t dstPos[blockSize];
+    float32_t time[blockSize];
+    float32_t lOrC[blockSize];
+    float32_t dst[blockSize];
+
+    // c++ 11 random library
+    std::random_device rd;
+    std::mt19937 mt(rd());
+    std::uniform_real_distribution<float32_t> dist(1, 300);
+    std::uniform_real_distribution<float32_t> dist_0_1(0, 1);
+
+    for(int i=0;i< blockSize; i++){
+
+        A[i] = dist(mt);
+        B[i] = dist(mt);
+        C[i] = dist(mt);
+        startPos[i] = dist(mt);
+        dstPos[i] = dist(mt);
+        time[i] = dist_0_1(mt);
+        lOrC[i] = dist_0_1(mt);
+
+/*
+        A[i] = 0;
+        B[i] = 0;
+        C[i] = 0;
+        startPos[i] = 10;
+        dstPos[i] = 20;
+        time[i] =  (i) / float(blockSize);
+        lOrC[i] = 1;
+*/
+    }
+
+
+    LOGI("$$$ start ...");
+    RoleCul(height, width, (float32_t*)&A, (float32_t*)&B, (float32_t*)&C, (float32_t*)&startPos,
+            (float32_t*)&dstPos,(float32_t*)&time, (float32_t*)&lOrC,(float32_t*)&dst);
+    LOGI("$$$ end ...");
+
+
+    for(int i=0;i<blockSize;i++){
+        LOGI("$$$ dst[%i]: %f", i, dst[i]);
+    }
+
+}
+
+
 
 typedef float32_t inputData;
 
