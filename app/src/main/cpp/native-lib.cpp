@@ -13,6 +13,7 @@
 #include <android/log.h>
 #include <android/fdsan.h>
 #include <random>
+#include <cstdint>
 //#include <android_native_app_glue.h>
 
 //#define _ENABLE_GPU_
@@ -69,36 +70,6 @@ extern "C" void fastcvadsp_fcvQ6SessionDeInit();
 */
 
 
-// matrix dot
-void cpuMatrixMultiplyf32( const float32_t * __restrict   src1,
-                      uint32_t                       src1Width,
-                      uint32_t                       src1Height,
-                      uint32_t                       src1Stride,
-                      const float32_t * __restrict   src2,
-                      uint32_t                       src2Width,
-                      uint32_t                       src2Stride,
-                      float32_t * __restrict         dst,
-                      uint32_t                       dstStride )
-{
-
-    float32_t result[src1Height];
-    for(int m=0;m<src1Height;m++){
-        //src1[Mn] * src2[nM]
-        dst[m] = 0;
-        for(int l=0;l<src2Width;l++) {
-            for (int n = 0; n < src1Width; n++) {
-                int idxSrc1 = m * src1Width + n;
-                int idxSrc2 = src2Width * n + l;
-                float32_t src1Value = src1[idxSrc1];
-                float32_t src2Value = src2[idxSrc2];
-                dst[m] += src1Value * src2Value;
-            }
-        }
-
-    }
-
-}
-
 struct tData
 {
     float32_t data;
@@ -117,20 +88,163 @@ struct tData
 };
 //#pragma pack(pop)
 
+//#define _BIT32_INT_
+#define _BIT16_INT_
+
+
+#ifdef _BIT32_INT_
+#define _OFFSET_A_ 4
+#define _SIZE_A_ 4
+typedef int32_t INPUT_T;
+#elif defined(_BIT16_INT_)
+#define _SIZE_A_ 2
+#define _OFFSET_A_ 2
+typedef int16_t INPUT_T;
+#endif
+
+extern "C" JNIEXPORT void JNICALL OddqToCubeMatrix(int width, int height,INPUT_T* srcX_arg, INPUT_T* srcY_arg, INPUT_T* dst){
+    fcvMemInit();
+    fcvMemInitPreAlloc(4 * 1024 * 1024);
+    fcvSetOperationMode(fcvOperationMode::FASTCV_OP_LOW_POWER);
+
+    int blockSize = width * height;
+    INPUT_T xAndOne[blockSize];
+    std::memset((void*)xAndOne, 0, blockSize * _SIZE_A_);
+
+    //_OFFSET_A_ -
+    for(int i=0;i<blockSize;i++){
+         xAndOne[i] = 1;
+    }
+
+    LOGI("$$$$$$$$  step1 ...");
+    //fcvSetElementsc4u8((uint8_t*)&xAndOne, width, height, 0, 0, 0, 0, 1, nullptr, 0);
+
+    INPUT_T* inputX32 = srcX_arg;
+    INPUT_T* inputY32 = srcY_arg;
+    uint8_t*  inputX = (uint8_t*)inputX32;
+    //uint8_t* inputOne = nullptr;
+    uint8_t* xAnd32One = (uint8_t*)&xAndOne;
+    int16_t* outputXAndOne = (int16_t*)fcvMemAlloc(2 * blockSize, 16);
+
+    
+
+    LOGI("$$$$$$$$  step2 ...");
+
+    fcvBitwiseAndu8(inputX, width * 2, height * 2, 0, xAnd32One, 0, (uint8_t*)outputXAndOne, 0);
+    fcvMultiplyScalars16(inputX32, width, height, 0, -1, 0, inputX32, 0);
+
+    LOGI("$$$$$$$$  step3 ...");
+
+    fcvMultiplyScalars16(inputY32, width, height, 0, 2, 0, inputY32, 0);
+    fcvAdds16(inputY32, width, height, 0, inputX32, 0, inputX32, 0);
+
+    LOGI("$$$$$$$$  step4 ...");
+
+    fcvAdds16(inputX32, width, height, 0, outputXAndOne, 0, inputX32, 0);
+    //fcvMultiplyScalars16(inputX32, width, height, 0, 1, -1, dst, 0);
+    fcvMultiplyScalars16(inputX32, width, height, 0, 1, 1, dst, 0);
+    LOGI("$$$$$$$$  step5 ...");
 
 
 
-extern "C" JNIEXPORT void JNICALL NeighborMatrix(int width, int height, float32_t* src, float32_t* dst){
-    uint8_t*  inputX = nullptr;
-    uint8_t* inputOne = nullptr;
-    uint8_t* inputTwo = nullptr;
-    uint8_t* outputXAndOne = nullptr;
-    fcvBitwiseAndu8(inputX, width, height, 0, inputOne, 0, outputXAndOne, 0);
-    //fcvMultiplyScalars16(outputXAndOne, width, height, 0, -1, 0, outputXAndOne, 0);
+    fcvMemFree(outputXAndOne);
 
-    int16_t* subtractDst = nullptr;
-
+    fcvMemDeInit();
+    fcvCleanUp();
 }
+
+extern "C" JNIEXPORT void JNICALL Java_cn_qianzhengwei_libhc_MainActivity_OddqToCubeMatrix(JNIEnv* env, jobject obj){
+    int width = 3;
+    int height = 5000;
+    int blockSize = width * height;
+    int16_t srcX[blockSize];
+    int16_t srcY[blockSize];
+    int16_t dst[blockSize];
+
+    for(int i=0;i<blockSize;i++){
+        srcX[i] = 1;
+        srcY[i] = 2;
+        dst[i] = 0;
+    }
+
+    OddqToCubeMatrix(width, height, (int16_t*)&srcX, (int16_t*)&srcY, (int16_t*)&dst);
+    LOGI("$$$ dst: %i", dst[0]);
+   // for(int i=0;i< width;i++){
+   //     LOGI("$$$ dst[%i]: %i", i, dst[i]);
+   //}
+}
+
+
+#define _NEIGHBOR_MATRIX_STRIDE_
+
+extern "C" JNIEXPORT void JNICALL NeighborMatrix(int width, int height,
+        int32_t* srcX_arg, int32_t* srcY_arg, int32_t* srcZ_arg,
+        int16_t* dst){
+    fcvMemInit();
+    fcvMemInitPreAlloc(4 * 1024 * 1024);
+    fcvSetOperationMode(fcvOperationMode::FASTCV_OP_LOW_POWER);
+
+    // 1000 * 3
+    int32_t* srcX = srcX_arg;
+    int32_t* srcY = srcY_arg;
+    int32_t* srcZ = srcZ_arg;
+    //fcvAbsDiffVs32(src, 0, width, height, 0, dst, 0);
+    fcvAbsDiffVs32(srcX, 0,width, height, 0, srcX, 0);
+    fcvAbsDiffVs32(srcY, 0,width, height, 0, srcY, 0);
+    fcvAbsDiffVs32(srcZ, 0,width, height, 0, srcZ, 0);
+
+#ifndef _NEIGHBOR_MATRIX_STRIDE_
+    // type cast
+    int16_t* i16X = (int16_t*)fcvMemAlloc(2 * width * height, 16);
+    int16_t* i16Y = (int16_t*)fcvMemAlloc(2 * width * height, 16);
+    int16_t* i16Z = (int16_t*)fcvMemAlloc(2 * width * height, 16);
+
+    for(int i=0;i< width * height;i++){
+        i16X[i] = (int16_t)srcX[i];
+        i16Y[i] = (int16_t)srcY[i];
+        i16Z[i] = (int16_t)srcZ[i];
+
+    }
+
+
+    fcvAdds16(i16X, width, height, 0, i16Y, 0, i16Y, 0);
+    fcvAdds16(i16Y, width, height, 0, i16Z, 0, dst, 0);
+#else
+    // avoid tpye cast
+    fcvAdds16((int16_t*)srcX, 1, width * height, 4, (int16_t*)srcY, 4, (int16_t*)srcY, 4);
+    fcvAdds16((int16_t*)srcY, 1, width *height, 4, (int16_t*)srcZ, 4, dst, 0);
+
+
+#endif
+
+    fcvMemDeInit();
+    fcvCleanUp();
+}
+
+
+extern "C" JNIEXPORT void JNICALL Java_cn_qianzhengwei_libhc_MainActivity_NeighborMatrix(JNIEnv* env, jobject obj){
+    int width = 3;
+    int height = 10000;
+    int blockSize = width * height;
+    int32_t srcX[blockSize];
+    int32_t srcY[blockSize];
+    int32_t srcZ[blockSize];
+    int16_t dst[blockSize];
+
+    for(int i=0;i<blockSize;i++){
+        srcX[i] = 1;
+        srcY[i] = 1;
+        srcZ[i] = 1;
+        dst[i] = 0;
+    }
+
+    NeighborMatrix(width, height, (int32_t*)&srcX, (int32_t*)&srcY, (int32_t*)&srcZ, (int16_t*)&dst);
+
+    for(int i=0; i<blockSize; i++){
+        LOGI("$$ dst[%i]: %i", i, dst[i]);
+    }
+}
+
 
 //miniMax
 //fcvMinMaxLocf32
@@ -139,6 +253,9 @@ extern "C" JNIEXPORT void JNICALL RoleCul(int width, int height,
         float32_t* A_arg, float32_t* B_arg, float32_t* C_arg,
         float32_t* startPos_arg, float32_t* dstPos_arg,
         float32_t* time_arg, float32_t* lOrC_arg, float32_t* dst){
+    fcvMemInit();
+    fcvMemInitPreAlloc(4 * 1024 * 1024);
+    fcvSetOperationMode(fcvOperationMode::FASTCV_OP_LOW_POWER);
 
     float32_t* lOrC = lOrC_arg;
     // start Pos
@@ -221,6 +338,9 @@ extern "C" JNIEXPORT void JNICALL RoleCul(int width, int height,
     fcvMemFree(oneSubT);
     fcvMemFree(oneSubTPow2);
     fcvMemFree(timePow2);
+
+    fcvMemDeInit();
+    fcvCleanUp();
 }
 
 

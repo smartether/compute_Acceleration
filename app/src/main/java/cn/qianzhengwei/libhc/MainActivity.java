@@ -20,8 +20,10 @@ public class MainActivity extends AppCompatActivity {
 
     public native String TestQML();
     public native void TestQualcommComputeDsp(int mode);
+    public native void NeighborMatrix();
 
     private native void RoleCul();
+    private native void OddqToCubeMatrix();
 
     // Used to load the 'native-lib' library on application startup.
     static {
@@ -150,8 +152,10 @@ public class MainActivity extends AppCompatActivity {
                     public void run() {
                         while(true) {
                             if(supportFastCV) {
-//                                TestQualcommComputeDsp(0);
-                                RoleCul();
+//                              //  TestQualcommComputeDsp(0);
+                                //RoleCul();
+//                              //  NeighborMatrix();
+                                OddqToCubeMatrix();
                             }
                             else{
                                 //TestQualcommComputeDsp(3);
