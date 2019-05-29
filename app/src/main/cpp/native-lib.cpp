@@ -126,7 +126,7 @@ extern "C" JNIEXPORT void JNICALL OddqToCubeMatrix(int width, int height,INPUT_T
     uint8_t* xAnd32One = (uint8_t*)&xAndOne;
     int16_t* outputXAndOne = (int16_t*)fcvMemAlloc(2 * blockSize, 16);
 
-    
+
 
     LOGI("$$$$$$$$  step2 ...");
 
@@ -243,6 +243,20 @@ extern "C" JNIEXPORT void JNICALL Java_cn_qianzhengwei_libhc_MainActivity_Neighb
     for(int i=0; i<blockSize; i++){
         LOGI("$$ dst[%i]: %i", i, dst[i]);
     }
+}
+
+extern "C" JNIEXPORT void JNICALL FarastHexogon(){
+    int width = 3;
+    int height = 5000;
+    int32_t* srcDistance = nullptr;
+    int32_t maxNum;
+    int32_t miniMum;
+    uint32_t maxX;
+    uint32_t maxY;
+    uint32_t  miniX;
+    uint32_t miniY;
+    fcvMinMaxLocs32(srcDistance, width, height, 0, &maxNum, &miniMum, &maxX, &maxY, &miniX, &miniY);
+
 }
 
 
