@@ -1,9 +1,11 @@
 package cn.qianzhengwei.libhc;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
 import java.io.File;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.HashMap;
@@ -60,6 +62,29 @@ public class FastCVManager{
     static boolean inited = false;
 
     public static boolean InitFastCV(String targetPath){
+
+        if(targetPath == "" || targetPath == null){
+            try {
+                Class clz = FastCVManager.class.getClassLoader().loadClass("com.unity3d.player.UnityPlayer");
+                Field curAct = clz.getField("currentActivity");
+                if(curAct != null) {
+                    Activity curActivity = (Activity) curAct.get(null);
+                    targetPath = curActivity.getCacheDir().getAbsolutePath();
+                }
+            }catch (ClassNotFoundException e){
+                Log.e("FastCVMgr", e.getMessage(), e);
+            }
+            catch (NoSuchFieldException e){
+                Log.e("FastCVMgr", e.getMessage(), e);
+            }
+            catch (IllegalAccessException e){
+                Log.e("FastCVMgr", e.getMessage(), e);
+            }
+            catch(java.lang.Exception e){
+                Log.e("FastCVMgr", e.getMessage(), e);
+            }
+        }
+
         Log.i("native-lib", "InitFastCV targetPath: " + targetPath);
         if(inited) return supportFastCV;
         inited = true;
