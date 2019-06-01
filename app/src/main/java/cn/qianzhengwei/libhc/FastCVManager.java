@@ -109,12 +109,17 @@ public class FastCVManager{
         libRequiredOrOption.put("libfastcvopt.so", true);
         libRequiredOrOption.put("libfastcvadsp_stub.so", true);
 
-
+        ArrayList<String> libToLoad = new ArrayList<>();
 
         for(String lib : libToCopy){
+            String libName = lib;
             java.io.File file = new java.io.File("/system/vendor/lib/" + lib);
             if(!file.exists() || !file.canRead()){
                 file = new java.io.File("/system/lib/" + lib);
+            }
+            if(!file.exists() || !file.canRead()){
+                libName =lib.replace(".so", "_system.so");
+                file = new java.io.File("/system/lib/" + libName);
             }
             java.io.File localFile = new java.io.File(targetPath + "/" + lib);
             if(!file.exists()){
@@ -125,10 +130,11 @@ public class FastCVManager{
             }
             if(file.exists() && (!localFile.exists() || file.length() != localFile.length())) {
                 copyFile(file, localFile);
+                libToLoad.add(libName);
             }
         }
         if(supportFastCV) {
-            for (String lib : libToCopy) {
+            for (String lib : libToLoad) {
                 java.io.File localFile = new java.io.File(targetPath + "/" + lib);
                 if (localFile.exists()) {
                     try {
